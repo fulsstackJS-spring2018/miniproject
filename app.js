@@ -1,4 +1,4 @@
-require("./dbSetup.js");
+require("./dbSetup.js").connect();
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');

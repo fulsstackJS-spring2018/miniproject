@@ -6,7 +6,7 @@ function getAllUsers(){
 }
 
 function addUser(firstName,lastName,userName,password){
-  //TBD
+  //TBD -- Should make the test fail
   return null;
 }
 
