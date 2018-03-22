@@ -1,4 +1,4 @@
-require("./dbSetup.js");
+require("./dbSetup.js").connect();
 
 var User = require("./models/user");
 var LocationBlog = require("./models/locationBlog");
@@ -7,7 +7,6 @@ var Position = require("./models/position");
  function userCreate(firstName,lastName,userName,password,type,company,companyUrl){
   var job = [{type,company,companyUrl},{type,company,companyUrl}];
   var userDetail = {firstName,lastName,userName,password,job};
-  console.log("sldfjaslkjflska")
   var user = new User(userDetail);
   return user.save();
 } 
@@ -35,6 +34,7 @@ async function createUsers(){
     userCreate("afasfaafa","sfssfdf","sfsfs","test","xxx","comp","comp.url"),
     userCreate("aaafasffa","fsf","teteter","test","xxx","comp","comp.url")
   ]
+
   var users = await Promise.all(userPromises);
   var posPromises = [
     positionCreator(123,123,users[0]._id),
