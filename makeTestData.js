@@ -23,8 +23,41 @@ function LocationBlogCreator(info, author, longitude, latitude) {
   var blog = new LocationBlog(LocationBlogDetail);
   return blog.save()
 }
+async function createUsers(){
+  await User.remove({});
+  await Position.remove({});
+  await LocationBlog.remove({});
+  
+  var userPromises = [
+    userCreate("Kurt","Wonnegut","annb","test","xxx","comp","comp.url"),
+    userCreate("aafa","sfsdf","dfsdf","test","xxx","comp","comp.url"),
+    userCreate("fsaf","sfsdf","fsfsf","test","xxx","comp","comp.url"),
+    userCreate("afasfaafa","sfssfdf","sfsfs","test","xxx","comp","comp.url"),
+    userCreate("aaafasffa","fsf","teteter","test","xxx","comp","comp.url")
+  ]
+  var users = await Promise.all(userPromises);
+  var posPromises = [
+    positionCreator(123,123,users[0]._id),
+    positionCreator(123,123,users[1]._id),
+    positionCreator(123,123,users[2]._id),
+    positionCreator(123,123,users[3]._id),
+    positionCreator(123,123,users[4]._id)];
+    
+  var positions = await Promise.all(posPromises);
 
-userCreate("a","b","annb","test","xxx","comp","comp.url")
+  var blogPromises = [
+    LocationBlogCreator("Cool Place",users[0]._id,26,148),
+    LocationBlogCreator("Another Cool Place",users[0]._id,56,56),
+    LocationBlogCreator("Yet Another Cool Place",users[0]._id,156,56),
+    LocationBlogCreator("The coolest Place",users[3]._id,156,56),
+  ];
+  var blogs = await Promise.all(blogPromises);
+  //console.log(users);
+  //console.log(positions);
+  console.log(blogs);
+}
+createUsers();
+/*
 .then(user => {
   console.log("########  USER  ########");
   console.log(user);
@@ -42,3 +75,4 @@ userCreate("a","b","annb","test","xxx","comp","comp.url")
   });
 })
 .catch(err=>console.log(err.message))
+*/
