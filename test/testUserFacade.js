@@ -37,6 +37,6 @@ describe("Testing the User Facade", function(){
      expect(user.firstName).to.be.equal("Peter");
     
      var users = await userFacade.getAllUsers();
-     expect(users.length).to.be.equal(2);
+     expect(users.length).to.be.equal(3);
    });
 })
